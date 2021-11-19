@@ -1,7 +1,22 @@
 
 /* 
-5 0,5,15 * * * jd_fanli.js
-修改自jd_fanli.py
+京东饭粒
+已支持IOS双京东账号,Node.js支持N个京东账号
+脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+============Quantumultx===============
+[task_local]
+#京东饭粒
+40 0,9,17 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_fanli.js, tag=京东饭粒, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
+
+================Loon==============
+[Script]
+cron "40 0,9,17 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_fanli.js,tag=京东饭粒
+
+===============Surge=================
+京东饭粒 = type=cron,cronexp="40 0,9,17 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_fanli.js
+
+============小火箭=========
+京东饭粒 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_fanli.js, cronexpr="40 0,9,17 * * *", timeout=3600, enable=true
 */
 
 const $ = new Env('京东饭粒');
@@ -54,27 +69,28 @@ if ($.isNode()) {
                 await $.wait(2000)
                 if($.count.finishCount<$.count.maxTaskCount){
                     let range = $.count.maxTaskCount-$.count.finishCount
-                    for(let i=0;i<range;i++){
-                        console.log(`开始第${$.count.finishCount+i+1}次`)
+                    for (let j = 0; j < range; j++) {
+                        console.log(`开始第${$.count.finishCount+j+1}次`)
                         await getTaskList(cookie)
                         await $.wait(2000)
-                        for (let i in $.taskList){
-                            // console.log($.taskList[i])
-                            if($.taskList[i].taskId!==null){
-                                await saveTaskRecord(cookie,$.taskList[i].taskId,$.taskList[i].businessId,$.taskList[i].taskType)
-                                if($.sendBody){
-                                    await $.wait(Number($.taskList[i].watchTime)*1000)
-                                    await saveTaskRecord1(cookie,$.taskList[i].taskId,$.taskList[i].businessId,$.taskList[i].taskType,$.sendBody.uid,$.sendBody.tt)
-                                }
-                                else{
+                        for (let k in $.taskList) {
+                            if ($.taskList[k].taskId !== null && $.taskList[k].status == 1) {
+                                console.log(`开始尝试活动:` + $.taskList[k].taskName);
+                                await saveTaskRecord(cookie, $.taskList[k].taskId, $.taskList[k].businessId, $.taskList[k].taskType)
+                                if ($.sendBody) {
+                                    await $.wait(Number($.taskList[k].watchTime) * 1300)
+                                    await saveTaskRecord1(cookie, $.taskList[k].taskId, $.taskList[k].businessId, $.taskList[k].taskType, $.sendBody.uid, $.sendBody.tt)
+                                } else {
                                     continue;
                                 }
-                                break;
-                           }
-                        }
-                    }
+                                if ($.count.finishCount = $.count.maxTaskCount) {
+                                    console.log(`任务全部完成!`);
+								}
+							}
+						}
                     
-                }
+					}
+				}
                 else{
                     console.log("任务已做完")
                 }
@@ -170,11 +186,14 @@ function saveTaskRecord1(ck,taskId,businessId,taskType,uid,tt) {
                 if (err) {
                     $.log(err)
                 } else {
-                    // console.log(data)
                     if (data) {
                         data = JSON.parse(data);
-                        // console.log("结果",data)
-                        console.log("浏览结果",data.content.msg)
+                        if (data.content) {
+                            if (data.content.status = 1)
+                                $.count.finishCount += 1;
+                            console.log("浏览结果", data.content.msg);
+                        } else
+                            console.log("结果", data);
                     } else {
                         $.log("京东返回了空数据")
                     }

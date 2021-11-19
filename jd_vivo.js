@@ -15,16 +15,16 @@ let token = '',LZ_TOKEN_KEY = '',LZ_TOKEN_VALUE = '',Referer = '',nickname = '';
 let Host = '', venderId = ``,shopId = ``,pin =  ``,lz_jdpin_token = ``;
 let hotFlag = false;
 let attrTouXiang = '';
-$.shareUuid = '84026af0ab84490fb06c94303eca1052';
+$.shareUuid = '';
 !(async () => {
     if (!cookiesArr[0]) {
         $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
         return;
     }
     let res = [];
-    try{res = await getAuthorShareCode('');}catch (e) {}
+    try{res = await getAuthorShareCode('https://raw.githubusercontent.com/linmudaye/share_code/main/vivo.json');}catch (e) {}
     if(!res){
-        try{res = await getAuthorShareCode('');}catch (e) {}
+        try{res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/linmudaye/share_code@main/vivo.json');}catch (e) {}
         if(!res){res = [];}
     }
     if(res.length > 0){
@@ -203,7 +203,7 @@ function takePostRequest(type) {
             break;
         case 'insxintiao':
             url= 'https://lzdz1-isv.isvjd.com/dingzhi/vivo/iqoojieyapa/insxintiao';
-            body = `pin=${encodeURIComponent(pin)}&activityId=${activityID}&playerId=39`;
+            body = `pin=${encodeURIComponent(pin)}&activityId=${activityID}&playerId=37`;
             break;
         case 'draw':
             url= 'https://lzdz1-isv.isvjd.com/dingzhi/vivo/iqoojieyapa/draw';

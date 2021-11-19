@@ -2,6 +2,7 @@
 京东极速版签到+赚现金任务
 每日9毛左右，满3，10，50可兑换无门槛红包
 ⚠️⚠️⚠️一个号需要运行40分钟左右
+
 活动时间：长期
 活动入口：京东极速版app-现金签到
 已支持IOS双京东账号,Node.js支持N个京东账号
@@ -10,11 +11,14 @@
 [task_local]
 #京东极速版
 21 3,8 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_speed_sign.js, tag=京东极速版, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
+
 ================Loon==============
 [Script]
 cron "21 3,8 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_speed_sign.js,tag=京东极速版
+
 ===============Surge=================
 京东极速版 = type=cron,cronexp="21 3,8 * * *",wake-system=1,timeout=33600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_speed_sign.js
+
 ============小火箭=========
 京东极速版 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_speed_sign.js, cronexpr="21 3,8 * * *", timeout=33600, enable=true
 */
@@ -106,7 +110,7 @@ async function signInit() {
     $.get(taskUrl('speedSignInit', {
       "activityId": "8a8fabf3cccb417f8e691b6774938bc2",
       "kernelPlatform": "RN",
-      "inviterId":"a99FNTpjt1jCNsakdDrRSw=="
+      "inviterId":"U44jAghdpW58FKgfqPdotA=="
     }), async (err, resp, data) => {
       try {
         if (err) {
@@ -664,9 +668,12 @@ function taskGetUrl(function_id, body) {
 function invite2() {
   let t = +new Date()
   let inviterIdArr = [
-    "a99FNTpjt1jCNsakdDrRSw==",
-    "hMMt5NIfs6lalG+VJ58n4kh7UrnluQPP69sxjzeFbZc=",
-    "pgQHO5TcujeOE8QRCqtQbE+J5hsKTce5NnXQ3Qpmzvg=",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
   ]
   let inviterId = inviterIdArr[Math.floor((Math.random() * inviterIdArr.length))]
   let options = {
@@ -692,9 +699,13 @@ function invite2() {
 function invite() {
   let t = +new Date()
   let inviterIdArr = [
-    "a99FNTpjt1jCNsakdDrRSw==",
-    "hMMt5NIfs6lalG+VJ58n4kh7UrnluQPP69sxjzeFbZc=",
-    "pgQHO5TcujeOE8QRCqtQbE+J5hsKTce5NnXQ3Qpmzvg=",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
   ]
   let inviterId = inviterIdArr[Math.floor((Math.random() * inviterIdArr.length))]
   let options = {

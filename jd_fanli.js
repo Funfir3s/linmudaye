@@ -1,18 +1,7 @@
+
 /* 
-京东饭粒
-已支持IOS双京东账号,Node.js支持N个京东账号
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
-============Quantumultx===============
-[task_local]
-#京东饭粒
-40 0,9,17 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_fanli.js, tag=京东饭粒, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
-================Loon==============
-[Script]
-cron "40 0,9,17 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_fanli.js,tag=京东饭粒
-===============Surge=================
-京东饭粒 = type=cron,cronexp="40 0,9,17 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_fanli.js
-============小火箭=========
-京东饭粒 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_fanli.js, cronexpr="40 0,9,17 * * *", timeout=3600, enable=true
+5 0,5,15 * * * jd_fanli.js
+修改自jd_fanli.py
 */
 
 const $ = new Env('京东饭粒');
@@ -74,7 +63,7 @@ if ($.isNode()) {
                             if($.taskList[i].taskId!==null){
                                 await saveTaskRecord(cookie,$.taskList[i].taskId,$.taskList[i].businessId,$.taskList[i].taskType)
                                 if($.sendBody){
-                                    await $.wait(10000)
+                                    await $.wait(Number($.taskList[i].watchTime)*1000)
                                     await saveTaskRecord1(cookie,$.taskList[i].taskId,$.taskList[i].businessId,$.taskList[i].taskType,$.sendBody.uid,$.sendBody.tt)
                                 }
                                 else{

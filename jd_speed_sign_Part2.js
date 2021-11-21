@@ -1,7 +1,6 @@
 /*
-cron "0 7 * * *" jd_speed_sign_Part2.js, tag:京东极速版任务1
+cron "0 7 * * *" jd_speed_sign_Part2.js, tag:京东极速版任务2
 */
- //详细说明参考 https://github.com/ccwav/QLScript2.
 const $ = new Env('京东极速版任务2');
 
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -105,7 +104,7 @@ async function signInit() {
     $.get(taskUrl('speedSignInit', {
       "activityId": "8a8fabf3cccb417f8e691b6774938bc2",
       "kernelPlatform": "RN",
-      "inviterId":"U44jAghdpW58FKgfqPdotA=="
+      "inviterId":"a99FNTpjt1jCNsakdDrRSw=="
     }), async (err, resp, data) => {
       try {
         if (err) {

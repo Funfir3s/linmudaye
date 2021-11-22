@@ -1,23 +1,23 @@
 /*
 活动入口： 京东极速版-我的-发财大赢家
  * /
-https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_big_winner.js
+https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_big_winnerhelp.js
 已支持IOS双京东账号, Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #发财大赢家
-1 6-22/3 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_big_winner.js, tag=新潮品牌狂欢, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+1 6-22/3 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_big_winnerhelp.js, tag=新潮品牌狂欢, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "1 6-22/3 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_big_winner.js tag=翻翻乐
+cron "1 6-22/3 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_big_winnerhelp.js tag=翻翻乐
 
 ===============Surge=================
-发财大赢家 = type=cron,cronexp="1 6-22/3 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_big_winner.js
+发财大赢家 = type=cron,cronexp="1 6-22/3 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_big_winnerhelp.js
 
 ============小火箭=========
-发财大赢家 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_big_winner.js, cronexpr="1 6-22/3 * * *", timeout=3600, enable=true
+发财大赢家 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_big_winnerhelp.js, cronexpr="1 6-22/3 * * *", timeout=3600, enable=true
  */
 const $ = new Env('发财大赢家助力');
 //Node.js用户请在jdCookie.js处填写京东ck;

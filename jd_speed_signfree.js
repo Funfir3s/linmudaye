@@ -1,7 +1,5 @@
 /*
-  入口>京东极速版>首页>签到免单
-  京东极速版,先下单,第二天开始签到
-  cron 30 10 * * * jd_speed_signfree.js 签到免单
+ cron 18 9 * * * jd_speed_signfree.js 签到免单
 */
 const $ = new Env('京东极速签到免单')
 const notify = $.isNode() ? require('./sendNotify') : '';

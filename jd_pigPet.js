@@ -27,7 +27,7 @@ const MISSION_BASE_API = `https://ms.jr.jd.com/gw/generic/mission/h5/m`;
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-let shareId = ["t_7LVGP8mopofh8AG0Q7E8AdoUJQ3Dik", "0IzWPVQGlmepafqlqgOSXw", "zExA7lNc3HrJrbVuG3xRVMAdoUJQ3Dik", "HlPKVsixbaNAw4-ekiAHwA"][Math.floor((Math.random() * 4))];
+let shareId = ["HhNhC8nOr0wHgkcO1_99tA", "ZWqaV44-Xluqiyh82joQnsAdoUJQ3Dik", "3s9EHRym8z-0S6bFOmHsuMAdoUJQ3Dik", "b578a1c1-2961-4245-b8dd-1dd24eb0c17c"][Math.floor((Math.random() * 4))];
 $.shareCodes = [];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {

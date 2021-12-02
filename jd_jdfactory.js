@@ -30,7 +30,7 @@ cron "10 0,6-23 * * *" script-path=https://raw.githubusercontent.com/linmudaye/l
 ============小火箭=========
 东东工厂 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_jdfactory.js, cronexpr="10 0,6-23 * * *", timeout=3600, enable=true
  */
-const $ = new Env('东东工厂互助版');
+const $ = new Env('东东工厂');
 
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;

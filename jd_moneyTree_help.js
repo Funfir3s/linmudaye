@@ -2,7 +2,6 @@
 *
 京东摇钱树助力
 活动入口：京东APP我的-更多工具-摇钱树，[活动链接](https://uua.jr.jd.com/uc-fe-wxgrowing/moneytree/index/?channel=yxhd)
-脚本更新地址：https://github.com/zero205/JD_tencent_scf
 助力逻辑：优先账号内互助，再给我助力
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
@@ -179,16 +178,17 @@ function help(sharePin) {
               $.isLogin = true;
               if (res.resultData.data) {
                 userInfo = res.resultData.data;
-                if (!userInfo.treeInfo.workerSum) {
-                  $.canRun = false;
-                  return
-                }
-                if (userInfo.treeInfo.workerSum === 4) {
-                  console.log(`助力失败，对方助力已满`);
-                } else {
-                  console.log(`助力成功`);
-                }
+             
                 if (userInfo.realName) {
+                  if (!userInfo.treeInfo.workerSum) {
+                    $.canRun = false;
+                    return
+                  }
+                  if (userInfo.treeInfo.workerSum === 4) {
+                    console.log(`助力失败，对方助力已满`);
+                  } else {
+                    console.log(`助力成功`);
+                  }
                 } else {
                   $.canRun = false;
                   $.log(`京东账号${$.index}${$.UserName}运行失败\n此账号未实名认证或者未参与过此活动\n①如未参与活动,请先去京东app参加摇钱树活动\n入口：我的->游戏与互动->查看更多\n②如未实名认证,请进行实名认证`)
@@ -260,13 +260,13 @@ function shareCodesFormat() {
   return new Promise(async resolve => {
     $.newShareCodes = [];
     let inviteCodes = [
-      't_7LVGP8mopofh8AG0Q7E8AdoUJQ3Dik@zExA7lNc3HrJrbVuG3xRVMAdoUJQ3Dik@cvwWiz9o2evNHFdNk0oNbMAdoUJQ3Dik@8MQ6wrd9H0IAujNGUqzTAA@0IzWPVQGlmepafqlqgOSXw',
-      't_7LVGP8mopofh8AG0Q7E8AdoUJQ3Dik@zExA7lNc3HrJrbVuG3xRVMAdoUJQ3Dik@cvwWiz9o2evNHFdNk0oNbMAdoUJQ3Dik@8MQ6wrd9H0IAujNGUqzTAA@0IzWPVQGlmepafqlqgOSXw'
+      '',
+      ''
     ];
     if ($.shareCodesArr[$.index - 1]) {
       $.newShareCodes = $.shareCodesArr[$.index - 1].split('@');
     } else {
-      console.log(`由于您第${$.index}个京东账号未提供shareCode,将为本脚本作者【zero205】助力\n`)
+      console.log(`由于您第${$.index}个京东账号未提供shareCode,将为本脚本作者助力\n`)
       const tempIndex = $.index > inviteCodes.length ? (inviteCodes.length - 1) : ($.index - 1);
       $.newShareCodes = inviteCodes[tempIndex].split('@');
     }

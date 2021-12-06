@@ -5,6 +5,7 @@ Node.JS专用
 IOS软件用户请使用 https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
 更新时间：2021-6-18
 推送通知默认简洁模式(多账号只发送一次)。如需详细通知，设置环境变量 JD_BEAN_SIGN_NOTIFY_SIMPLE 为false即可(N账号推送N次通知)。
+Modified From github https://github.com/ruicky/jd_sign_bot
 cron 5 0,10 * * * jd_bean_sign.js
  */
 const $ = new Env('京东多合一签到');
@@ -43,7 +44,7 @@ if ($.isNode()) {
   process.env.JD_BEAN_SIGN_NOTIFY_SIMPLE = process.env.JD_BEAN_SIGN_NOTIFY_SIMPLE ? process.env.JD_BEAN_SIGN_NOTIFY_SIMPLE : 'true';
   await requireConfig();
   // 下载最新代码
-  // await downFile();
+  await downFile();
   if (!await fs.existsSync(JD_DailyBonusPath)) {
     console.log(`\nJD_DailyBonus.js 文件不存在，停止执行${$.name}\n`);
     await notify.sendNotify($.name, `本次执行${$.name}失败，JD_DailyBonus.js 文件下载异常，详情请查看日志`)

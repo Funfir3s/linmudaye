@@ -5,7 +5,7 @@ by: 小手冰凉 tg:@chianPLA
 ===============Quantumultx===============
 [task_local]
 #金榜年终奖
-47 0,10 * * jd_gold_wish2.js, tag=金榜年终奖, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+47 0,10 * * * jd_gold_wish2.js, tag=金榜年终奖, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
  */
 const $ = new Env('金榜年终奖');

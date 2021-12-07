@@ -5,7 +5,7 @@
 ============Node===============
 [task_local]
 #每周领取权益活动
-10 17 6 12 * jd_draw.js, tag=每周领取权益活动, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_jr_draw.png, enabled=true
+26 22 * * 2 jd_draw.js, tag=生活特权～免费领京豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_jr_draw.png, enabled=true
  
 */
 const $ = new Env('生活特权～免费领京豆');

@@ -1,8 +1,9 @@
 /* 
-cron 14 10 * * * jd_sign.js
+cron 14 10 * * * https://raw.githubusercontent.com/smiek2121/scripts/master/jd_sign_graphics.js
 只支持nodejs环境
 需要安装依赖 
 npm i png-js 或者 npm i png-js -S
+
 如果 read ECONNRESET 错误 可以试试
 环境变量 JOY_HOST
 修改域名 https://jdjoy.jd.com 可以改成ip https://49.7.27.236
@@ -108,7 +109,7 @@ async function signRun() {
     }else{
       errorNum++;
     }
-    await $.wait(1000)
+    await $.wait(parseInt(Math.random() * 5000 + 10000, 10))
   }
 }
 

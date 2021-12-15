@@ -9,7 +9,7 @@ npm i png-js 或者 npm i png-js -S
 */
 
 const validator = require('./JDJRValidator_smiek.js');
-const Faker=require('./sign_graphics_validate.js') 
+const Faker=require('./sign_graphics_validate.js')
 
 const $ = new Env('京东签到图形验证');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -135,7 +135,7 @@ function Login(i) {
                 $.appId = 'b342e';
                 await requestAlgo();
                 await Sign(i,1)
-                let time = Math.random() * 5000 + 10000
+                let time = Math.random() * 5000 + 15000
                 console.log(`等待${(time/1000).toFixed(3)}秒`)
                 await $.wait(parseInt(time, 10))
               } else if (data.hasSign === true) {

@@ -4,7 +4,7 @@
 脚本兼容: Quantumult X, Surge, Loon, JSBox, Node.js
 [task_local]
 #半点京豆雨
-31 20-23/1 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_live_redrain.js, tag=半点京豆雨, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+31 20-23/1 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_redrain_half.js, tag=半点京豆雨, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 ==============Loon==============
 [Script]
 cron "31 20-23/1 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_redrain_half.js,tag=半点京豆雨

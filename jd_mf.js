@@ -6,14 +6,11 @@
 [task_local]
 #京东小魔方
 31 2,8 * * * jd_mf.js, tag=京东小魔方, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
-
 ================Loon==============
 [Script]
 25 0,13 * * * jd_mf.js
-
 ===============Surge=================
 京东小魔方 = type=cron,cronexp="31 2,8 * * *",wake-system=1,timeout=3600,script-path=jd_mf.js
-
 ============小火箭=========
 京东小魔方 = type=cron,script-path=jd_mf.js, cronexpr="31 2,8 * * *", timeout=3600, enable=true
  */
@@ -256,7 +253,7 @@ function doInteractiveAssignment(extraType, encryptProjectId, sourceCode, encryp
             } else if (extraType === "sign1") {
               console.log(`签到成功：获得${data.rewardsInfo.successRewards[$.type][0] ? `${data.rewardsInfo.successRewards[$.type][0].quantity}${data.rewardsInfo.successRewards[$.type][0].rewardName}` : `${data.rewardsInfo.successRewards[$.type].quantityDetails[0].quantity}${data.rewardsInfo.successRewards[$.type].quantityDetails[0].rewardName}`}`)
             } else if (actionType === "0") {
-              if (data.assignmentInfo.completionCnt === data.assignmentInfo.maxTimes) {
+              if (data.code === 0) {
                 $.complete = true
                 console.log(`完成成功：获得${data.rewardsInfo.successRewards[$.type][0] ? `${data.rewardsInfo.successRewards[$.type][0].quantity}${data.rewardsInfo.successRewards[$.type][0].rewardName}` : `${data.rewardsInfo.successRewards[$.type].quantityDetails[0].quantity}${data.rewardsInfo.successRewards[$.type].quantityDetails[0].rewardName}`}`)
               }

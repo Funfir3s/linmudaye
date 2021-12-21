@@ -75,7 +75,7 @@ if ($.isNode() && process.env.WP_APP_TOKEN_ONE) {
 	WP_APP_TOKEN_ONE = process.env.WP_APP_TOKEN_ONE;
 }
 
-let doExJxBeans ="false";
+let doExJxBeans ="true";
 let time = new Date().getHours();
 if ($.isNode()) {
 	if(process.env.BEANCHANGE_ExJxBeans=="true"){

@@ -41,24 +41,24 @@ if ($.isNode()) {
     return;
   }
   if (!jd_redrain_activityId) {
-    $.log(`\n甘露殿【https://t.me/jdredrain】提醒你:本地红包雨配置获取错误，尝试从远程读取配置\n`);
-    await $.wait(1000);
-    if (!jd_redrain_url) {
-      $.log(`\n甘露殿【https://t.me/jdredrain】提醒你:今日龙王🐲出差，天气晴朗☀️，改日再来～\n`);
-      return;
-    }    
+    $.log(`\n本地红包雨配置获取错误，尝试从远程读取配置\n`);
+    await $.wait(1000);   
     let RedRainIds = await getRedRainIds(jd_redrain_url);
+	if (!RedRainIds) {
+    await $.wait(1000)
+    RedRainIds = await getRedRainIds('https://gitee.com/KingRan521/JD-Scripts/raw/master/shareCodes/redrain.json')
+	}
     for (let i = 0; i < 1; i++) {
       jd_redrain_activityId = RedRainIds[0];
     }
   }
   if (!jd_redrain_activityId) {
-    $.log(`\n甘露殿【https://t.me/jdredrain】提醒你:今日龙王🐲出差，天气晴朗☀️，改日再来～\n`);
+    $.log(`\n今日龙王🐲出差，天气晴朗☀️，改日再来～\n`);
     return;
   }
   let codeList = jd_redrain_activityId.split("@");
   let hour = (new Date().getUTCHours() + 8) % 24;
-  console.log(`\n甘露殿【https://t.me/jdredrain】提醒你:龙王就位: ${codeList}\n\n准备领取${hour}点京豆雨\n`);
+  console.log(`\n龙王就位: ${codeList}\n\n准备领取${hour}点京豆雨\n`);
   for (let codeItem of codeList) {
     let ids = {};
     for (let i = 0; i < 24; i++) {
@@ -68,11 +68,11 @@ if ($.isNode()) {
       $.activityId = ids[hour];
       $.log(`\nRRA: ${codeItem}`);
     } else {
-      $.log(`\n甘露殿【https://t.me/jdredrain】提醒你:无法从本地读取配置，请检查运行时间\n`);
+      $.log(`\n无法从本地读取配置，请检查运行时间\n`);
       return;
     }
     if (!/^RRA/.test($.activityId)) {
-      console.log(`\n甘露殿【https://t.me/jdredrain】提醒你:RRA: "${$.activityId}"不符合规则\n`);
+      console.log(`\nRRA: "${$.activityId}"不符合规则\n`);
       continue;
     }
     for (let i = 0; i < cookiesArr.length; i++) {

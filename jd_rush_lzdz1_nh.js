@@ -30,7 +30,7 @@ if ($.isNode()) {
     authorCodeList = await getAuthorCodeList('https://gitee.com/linmudaye/code/raw/master/lzdz1_nh.json')
     if($.getAuthorCodeListerr === false){
         authorCodeList = [
-            '',
+            'e926239c413a436d8dcdab68744898dd',
         ]
     }
     // console.log(authorCodeList)

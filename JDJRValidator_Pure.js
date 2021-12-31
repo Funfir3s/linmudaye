@@ -1,11 +1,13 @@
 /*
   由于 canvas 依赖系统底层需要编译且预编译包在 github releases 上，改用另一个纯 js 解码图片。若想继续使用 canvas 可调用 runWithCanvas 。
+
   添加 injectToRequest 用以快速修复需验证的请求。eg: $.get=injectToRequest($.get.bind($))
-  宠汪汪系列用
 */
 const https = require('https');
 const http = require('http');
 const stream = require('stream');
+const { promisify } = require('util');
+const pipelineAsync = promisify(stream.pipeline);
 const zlib = require('zlib');
 const vm = require('vm');
 const PNG = require('png-js');
@@ -322,11 +324,10 @@ class JDJRValidator {
         let res = response;
         if (res.headers['content-encoding'] === 'gzip') {
           const unzipStream = new stream.PassThrough();
-          stream.pipeline(
+          pipelineAsync(
             response,
             zlib.createGunzip(),
             unzipStream,
-            reject,
           );
           res = unzipStream;
         }

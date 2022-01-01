@@ -7,7 +7,7 @@
 默认：不执行 如需要请添加环境变量
 gua_cleancart_Run="true"
 gua_cleancart_SignUrl="" # 算法url
-
+cron 0 23 * * * jd_cart_remove.js
 ——————————————
 1.@&@ 前面加数字 指定账号pin
 如果有中文请填写中文

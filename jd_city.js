@@ -5,14 +5,11 @@
 [task_local]
 #城城领现金
 0 0-23/1 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_city.js, tag=城城领现金, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
-
 =================================Loon===================================
 [Script]
 cron "0 0-23/1 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_city.js,tag=城城领现金
-
 ===================================Surge================================
 城城领现金 = type=cron,cronexp="0 0-23/1 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_city.js
-
 ====================================小火箭=============================
 城城领现金 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_city.js, cronexpr="0 0-23/1 * * *", timeout=3600, enable=true
  */
@@ -172,17 +169,17 @@ function getInfo(inviteId, flag = false) {
                       await receiveCash("", "2");
                     }
                   }
-                  const { taskDetailResultVo } = data.data.result.taskInfo;
-                  const { lotteryTaskVos, taskVos } = taskDetailResultVo;
-                  for (let lotteryTask of lotteryTaskVos) {
-                    if (lotteryTask.times >= lotteryTask.maxTimes && lotteryTask.times !== undefined) {
-                      for (let lo of lotteryTask?.badgeAwardVos || []) {
-                        if (lo.status === 3) {
-                          await receiveCash("", "6");
-                        }
-                      }
-                    }
-                  }
+                  // const { taskDetailResultVo } = data.data.result.taskInfo;
+                  // const { lotteryTaskVos, taskVos } = taskDetailResultVo;
+                  // for (let lotteryTask of lotteryTaskVos) {
+                  //   if (lotteryTask.times >= lotteryTask.maxTimes && lotteryTask.times !== undefined) {
+                  //     for (let lo of lotteryTask?.badgeAwardVos || []) {
+                  //       if (lo.status === 3) {
+                  //         await receiveCash("", "6");
+                  //       }
+                  //     }
+                  //   }
+                  // }
                   // for (let task of taskVos || []) {
                   //   const t = Date.now();
                   //   if (task.status === 1 && t >= task.taskBeginTime && t < task.taskEndTime) {
@@ -366,7 +363,6 @@ function readShareCode() {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
             data = JSON.parse(data);

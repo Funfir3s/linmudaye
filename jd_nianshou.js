@@ -6,14 +6,11 @@ by: https://github.com/shufflewzc/faker2/blob/main/jd_zhanianshou.js
 [task_local]
 #炸年兽
 0 0-23/5 * * * jd_nianshou.js, tag=炸年兽, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
-
 =================================Loon===================================
 [Script]
 cron "0 0-23/5 * * *" script-path=jd_nianshou.js,tag=炸年兽
-
 ===================================Surge================================
 炸年兽 = type=cron,cronexp="0 0-23/5 * * *",wake-system=1,timeout=3600,script-path=jd_nianshou.js
-
 ====================================小火箭=============================
 炸年兽 = type=cron,script-path=jd_nianshou.js, cronexpr="0 0-23/5 * * *", timeout=3600, enable=true
  */
@@ -37,7 +34,9 @@ if ($.isNode()) {
     cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let inviteCodes = []
+let inviteCodes = [
+
+]
 $.shareCodesArr = [];
 
 !(async() => {
@@ -159,15 +158,19 @@ $.shareCodesArr = [];
                                 }
                                 break
                             case 21:
-                                for (var o = 0; o < task.brandMemberVos.length; o++) {
-                                    if (task.brandMemberVos[o].status == 1) {
-                                        console.log(`\n\n ${task.brandMemberVos[o].title}`)
-                                        memberUrl = task.brandMemberVos[o].memberUrl
-                                        memberUrl = transform(memberUrl)
-                                        await join(task.brandMemberVos[o].vendorIds, memberUrl.channel, memberUrl.shopId ? memberUrl.shopId : "")
-                                        await tigernian_collectScore(task.brandMemberVos[o].taskToken, task.taskId)
-                                    }
+                                if (process.env.FS_LEVEL != 'card') {
+                                    console.log('默认不开卡，设置FS_LEVEL为card开卡')
+                                }else{
+                                    for (var o = 0; o < task.brandMemberVos.length; o++) {
+                                        if (task.brandMemberVos[o].status == 1) {
+                                            console.log(`\n\n ${task.brandMemberVos[o].title}`)
+                                            memberUrl = task.brandMemberVos[o].memberUrl
+                                            memberUrl = transform(memberUrl)
+                                            await join(task.brandMemberVos[o].vendorIds, memberUrl.channel, memberUrl.shopId ? memberUrl.shopId : "")
+                                            await tigernian_collectScore(task.brandMemberVos[o].taskToken, task.taskId)
+                                        }
 
+                                    }
                                 }
                         }
 
@@ -189,7 +192,7 @@ $.shareCodesArr = [];
         }
     }
 })()
-    .catch((e) => {
+.catch((e) => {
         $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
     })
     .finally(() => {
@@ -200,8 +203,8 @@ function transform(str) {
     var REQUEST = new Object,
         data = str.slice(str.indexOf("?") + 1, str.length - 1),
         aParams = data.substr(1).split("&");
-    for (i = 0; i < aParams.length; i++) {
-        var aParam = aParams[i].split("=");
+    for (i = 0; i < aParams.length; i++) {　　
+        var aParam = aParams[i].split("=");　　
         REQUEST[aParam[0]] = aParam[1]
     }
     return REQUEST
@@ -223,8 +226,8 @@ function get_secretp() {
                             if (data.data && data.data.bizCode === 0) {
                                 secretp = data.data.result.homeMainInfo.secretp
                                 console.log(secretp)
-                            }
-                        } else
+                          }
+                        } else 
                         if (data.code != 0) {
                             //console.log(`\n\nsecretp失败:${JSON.stringify(data)}\n`)
                         }

@@ -32,7 +32,7 @@ if ($.isNode()) {
     authorCodeList = await getAuthorCodeList('https://gitee.com/linmudaye/code/raw/master/lzdz1_league.json')
     if($.getAuthorCodeListerr === false){
         authorCodeList = [
-            '',
+            '9ba9fd6e48284c6f8b7a9f27bd10115d',
         ]
     }
     for (let i = 0; i < cookiesArr.length; i++) {

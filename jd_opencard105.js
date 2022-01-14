@@ -26,7 +26,7 @@ guaopenwait105="0"
 
 All变量适用
 ————————————————
-入口：[ 1.6~1.20 山海之巅，冲刺大牌盲盒 (https://lzdz1-isv.isvjcloud.com/dingzhi/customized/common/index/activity?activityId=dz220106100001616201Union&shareUuid=78efeadf279a443ba771d0673a8b022a)]
+入口：[ 1.6~1.20 山海之巅，冲刺大牌盲盒 (https://lzdz1-isv.isvjcloud.com/dingzhi/customized/common/index/activity?activityId=dz220106100001616201Union&shareUuid=56bad68bc28341819afdfbb31f4d4240)]
 请求太频繁会被黑ip
 过10分钟再执行
 

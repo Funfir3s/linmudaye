@@ -1,6 +1,12 @@
 /*
 #天天压岁钱
-33 0,13 * * * jd_ttysq.js
+京喜App-下方中间-天天压岁钱
+33 0,14,20 * * * jd_ttysq.js
+
+#############
+PS:(不是玩代码的人，写代码有bug很正常！！)
+
+
  */
 const $ = new Env('天天压岁钱');
 //Node.js用户请在jdCookie.js处填写京东ck;
@@ -60,11 +66,11 @@ const JD_API_HOST = `https://m.jingxi.com`;
         if (authorCode.length > 3) {
             authorCode = authorCode.splice(0, 3)
         }
-        authorCode = authorCode.map(code => {
+        authorCode = authorCode.map(entity => {
             return {
                 "user": "author",
-                "code": code,
-                "redId": Math.floor(1 + Math.random() * 10),
+                "code": entity.code,
+                "redId": entity.rpids[Math.floor((Math.random() * entity.rpids.length))],
                 "beHelp": 0,
                 "helpId": $.taskId
             }
@@ -172,11 +178,11 @@ function getAuthorShareCode(url) {
 async function main() {
     try {
         await task(`jxnhj/GetUserInfo`, `strInviteId=&nopopup=0`, show = true)
-        await $.wait(500)
+        await $.wait(1500)
         await task(`jxnhj/BestWishes`)
-        await $.wait(500)
+        await $.wait(1500)
         await task(`jxnhj/GetTaskList`)
-        await $.wait(500)
+        await $.wait(1500)
         if (!$.allTaskList) {
             console.log(`获取任务列表失败`)
         } else {

@@ -1,6 +1,6 @@
 /*
 蛙老的会场红包脚本
-0 10 * * * jd_redEnvelope.js
+0 10 * * * jd_nhRedEnvelope.js
 整点跑 红包几率大点
 
 返利变量：gua_nhjRed_rebateCode，若需要返利给自己，请自己修改环境变量[gua_nhjRed_rebateCode]换成自己的返利
@@ -14,7 +14,7 @@ export gua_nhjRed_rebatePin="pin1,pin2"
 */
 
 let rebatePin = ''
-const $ = new Env('战队加码红包');
+const $ = new Env('年货节红包');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 CryptoScripts()
@@ -141,7 +141,7 @@ let nowTime = new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*
 
 async function run(type = 0){
   try{
-    let rebateCodes = ["SwndvkQ", "SwndvkQ", "SwndvkQ"];
+    let rebateCodes = ["SIjNjoA", "SIjNjoA", "SIjNjoA"];
     rebateCodes = rebateCodes[Math.floor((Math.random() * rebateCodes.length))]
     rebateCodes = $.isNode() ? (process.env.gua_nhjRed_rebateCode ? process.env.gua_nhjRed_rebateCode : `${rebateCodes}`) : ($.getdata('gua_nhjRed_rebateCode') ? $.getdata('gua_nhjRed_rebateCode') : `${rebateCodes}`);
     rebateCode = rebateCodes

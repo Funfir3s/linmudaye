@@ -61,7 +61,7 @@ const JD_API_HOST = `https://api.m.jd.com/client.action`;
             await main()
         }
     };
-    $.shareCoseList = [...new Set([...$.shareCoseList,'QmLpaFXm34BaWgn3C3O2WA','ffn_Yc--WKEab2iPzmVB4BM3VKR8-0h7mdYsY627fC0','c_HK4TBhdsqsRJPgFj7RpA'])]
+    $.shareCoseList = [...new Set([...$.shareCoseList,'hB3fUA0a0EWOG-03ETlvuA','JmjkeBKOuSktJvZj59_KB6Lk_oTN8WGrrdv0wGtyqNU','rMsTD4iQYpVSSqIivGlhEIoTvEZ4E1fZf1RR57Fdd74'])]
     //去助力与开箱
     for (let i = 0; i < cookiesArr.length; i++) {
         cookie = cookiesArr[i];

@@ -1,4 +1,9 @@
 /*
+TG https://t.me/aaron_scriptsG
+
+CK1自动组队 加密部分为h5st 不偷助力！！！
+
+
 33 0,6-23/2 * * * jd_nianshou.js
 */
 const $ = new Env('炸年兽');

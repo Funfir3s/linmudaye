@@ -1,20 +1,14 @@
 /*
 京东金榜
-by: TG频道：https://t.me/sheeplost
-活动时间：2021-07-15到2021-0815
-更新时间：2021-06-3 12:00
-脚本兼容: QuantumultX, Surge,Loon, JSBox, Node.js
-=================================Quantumultx=========================
+活动入口：https://h5.m.jd.com/babelDiy/Zeus/2H5Ng86mUJLXToEo57qWkJkjFPxw/index.html
+by:小手冰凉 tg:@chianPLA
+脚本更新时间：2022-1-5
+脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+新手写脚本，难免有bug，能用且用。
+===================quantumultx================
 [task_local]
 #京东金榜
-13 6 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_gold_sign.js, tag=京东金榜, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
-=================================Loon===================================
-[Script]
-cron "13 6 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_gold_sign.js,tag=京东金榜
-===================================Surge================================
-京东金榜 = type=cron,cronexp="13 6 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_gold_sign.js
-====================================小火箭=============================
-京东金榜 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_gold_sign.js, cronexpr="13 6 * * *", timeout=3600, enable=true
+13 7 * * * jd_gold_sign.js, tag=京东金榜, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
  */
 const $ = new Env('京东金榜');
 const notify = $.isNode() ? require('./sendNotify') : '';

@@ -31,8 +31,8 @@ let helpAuthor = true;
 const randomCount = $.isNode() ? 5 : 5;
 let cash_exchange = false;//是否消耗2元红包兑换200京豆，默认否
 const inviteCodes = [
-  `9bWQulkXsnSg@ eU9YabrjZvR082rQzHEbhA@eU9YaL7kM_kg-GzdnnUb3w`,
-  `eU9YMrPoELl6rS2znA9R@eU9YKr_2A4ZjgxqWuiJa@eU9YD7rHGZVZjx-miily`,
+  ``,
+  ``,
 ]
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -441,8 +441,13 @@ function getSign(functionId, body) {
       "client":"apple",
       "clientVersion":"10.3.0"
     }
+    let Host = ""
     let HostArr = ['jdsign.cf', 'signer.nz.lu']
-    let Host = HostArr[Math.floor((Math.random() * HostArr.length))]
+    if (process.env.SIGN_URL) {
+      Host = process.env.SIGN_URL
+    } else {
+      Host = HostArr[Math.floor((Math.random() * HostArr.length))]
+    }
     let options = {
       url: `https://cdn.nz.lu/ddo`,
       body: JSON.stringify(data),

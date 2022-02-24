@@ -57,7 +57,17 @@ if ($.isNode() && process.env.CC_NOHELPAFTER8) {
 		}			
 	}	
 }
-
+let WP_APP_TOKEN_ONE = "";
+if ($.isNode()) {
+	if (process.env.WP_APP_TOKEN_ONE) {		
+		WP_APP_TOKEN_ONE = process.env.WP_APP_TOKEN_ONE;
+	}
+}
+if(WP_APP_TOKEN_ONE)
+	console.log(`检测到已配置Wxpusher的Token，启用一对一推送...`);
+else
+	console.log(`检测到未配置Wxpusher的Token，禁用一对一推送...`);
+	
 console.log(`共${cookiesArr.length}个京东账号\n`);
 
 !(async() => {
@@ -166,6 +176,9 @@ async function jdPet() {
                 if ($.isNode()) {
                     await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName || $.UserName}奖品已可领取`, `京东账号${$.index} ${$.nickName || $.UserName}\n${$.petInfo.goodsInfo.goodsName}已可领取`);
                 }
+				if ($.isNode() && WP_APP_TOKEN_ONE) {
+					await notify.sendNotifybyWxPucher($.name, `【提醒⏰】${$.petInfo.goodsInfo.goodsName}已可领取\n【领取步骤】京东->我的->东东萌宠兑换京东红包,可以用于京东app的任意商品.`, `${$.UserName}`);
+				}
                 return
             } else if ($.petInfo.petStatus === 6) {
                 await slaveHelp(); //已领取红包,但未领养新的,也能继续助力好友
@@ -174,6 +187,7 @@ async function jdPet() {
                 if ($.isNode()) {
                     await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName || $.UserName}奖品已可领取`, `京东账号${$.index} ${$.nickName || $.UserName}\n已领取红包,但未继续领养新的物品`);
                 }
+				
                 return
             }
             //console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${$.petInfo.shareCode}\n`);
@@ -408,7 +422,6 @@ async function slaveHelp() {
 			}else{
 				console.log(`助力好友结果: ${response.message}`);
 			}
-		        await $.wait(2000)
 				
         }
     }
@@ -429,10 +442,6 @@ async function petSport() {
             if (resultCode == 0) {
                 let sportRevardResult = await request('getSportReward');
                 console.log(`领取遛狗奖励完成: ${JSON.stringify(sportRevardResult)}`);
-	      } else if (resultCode == 1013) {
-		let sportRevardResult = await request('getSportReward', {"version":1});
-		console.log(`领取遛狗奖励完成: ${JSON.stringify(sportRevardResult)}`);
-		if (sportRevardResult.resultCode == 0) resultCode = 0
             }
             times++;
         } while (resultCode == 0 && code == 0)
@@ -654,7 +663,7 @@ function taskUrl(function_id, body = {}) {
     body["channel"] = 'app';
     return {
         url: `${JD_API_HOST}?functionId=${function_id}`,
-        body: `body=${encodeURIComponent(JSON.stringify(body))}&appid=wh5&loginWQBiz=pet-town&clientVersion=9.0.4`,
+        body: `body=${escape(JSON.stringify(body))}&appid=wh5&loginWQBiz=pet-town&clientVersion=9.0.4`,
         headers: {
             'Cookie': cookie,
             'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),

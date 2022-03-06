@@ -1,29 +1,25 @@
 /*
-#柠檬赚金币
+#极速版赚金币
 ##入口为极速版 百元生活费 赚金币 邀请好友
-##第一次运行可不填写邀请码 运行一次查看自己的邀请码
-##export InviterPin="dS%2Bp85VyjydPuAOOnFP%2Faw%3D%3D"
-##助力逻辑：填写你的邀请码变量之后会助力你填写的邀请码，未填写则会默认给【zero205】助力，介意请勿运行
-
-
 [task_local]
 #柠檬赚金币
-0 7 * * * jd_zjb.js, tag=柠檬赚金币, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+25 1,13 * * * jd_zjb.js
 */
-const $ = new Env('柠檬赚金币');
+const $ = new Env('极速版赚金币邀请');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
-let InviterPin = '';
+let InviterPin = 'a99FNTpjt1jCNsakdDrRSw==';
 
 if ($.isNode() && process.env.InviterPin) {
   InviterPin = process.env.InviterPin;
 }
 if (InviterPin.length == 0) {
-  console.log(`\n您未填写邀请码变量，默认帮【】助力\n`);
+  console.log(`\n还未填写邀请码变量，请去环境变量中填写变量为自己的邀请码\n`);
+  console.log(`export InviterPin="你的邀请码"\n`);
 }
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -63,7 +59,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
       if (InviterPin.length != 0) {
         await help()
       } else {
-        await help2("zero205",Math.random() > 0.5 ? "a99FNTpjt1jCNsakdDrRSw==" : "hMMt5NIfs6lalG+VJ58n4kh7UrnluQPP69sxjzeFbZc=")        
+        await help2("zjb",Math.random() > 0.4 ? "4y1yGPA4HCaFNCw8BZ6gsw==" : "pVbNk9xIuI02DeRtwUiztA==")        
       }
     }
   }
@@ -95,7 +91,7 @@ function info() {
           reust = JSON.parse(data)
         }
         if (reust.code === 0) {
-          $.log("\n【您的赚金币邀请码为】" + reust.data.encryptionInviterPin)
+          $.log("\n【邀请码为】" + reust.data.encryptionInviterPin)
         } else
           console.log(data.message)
       } catch (e) {

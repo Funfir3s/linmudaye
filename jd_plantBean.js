@@ -1,5 +1,5 @@
 /*
-种豆得豆 脚本更新地址：https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_plantBean.js
+种豆得豆 脚本更新地址：jd_plantBean.js
 更新时间：2021-08-20
 活动入口：京东APP我的-更多工具-种豆得豆
 已支持IOS京东多账号,云端多京东账号
@@ -7,23 +7,17 @@
 注：会自动关注任务中的店铺跟商品，介意者勿使用。
 互助码shareCode请先手动运行脚本查看打印可看到
 每个京东账号每天只能帮助3个人。多出的助力码将会助力失败。
-
 // zero205：已添加自己账号内部互助，有剩余助力次数再帮我助力
-
 =====================================Quantumult X=================================
 [task_local]
-1 7-21/2 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_plantBean.js, tag=种豆得豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdzd.png, enabled=true
-
+1 7-21/2 * * * jd_plantBean.js, tag=种豆得豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdzd.png, enabled=true
 =====================================Loon================================
 [Script]
-cron "1 7-21/2 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_plantBean.js,tag=京东种豆得豆
-
+cron "1 7-21/2 * * *" script-path=jd_plantBean.js,tag=京东种豆得豆
 ======================================Surge==========================
-京东种豆得豆 = type=cron,cronexp="1 7-21/2 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_plantBean.js
-
+京东种豆得豆 = type=cron,cronexp="1 7-21/2 * * *",wake-system=1,timeout=3600,script-path=jd_plantBean.js
 ====================================小火箭=============================
-京东种豆得豆 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_plantBean.js, cronexpr="1 7-21/2 * * *", timeout=3600, enable=true
-
+京东种豆得豆 = type=cron,script-path=jd_plantBean.js, cronexpr="1 7-21/2 * * *", timeout=3600, enable=true
 */
 const $ = new Env('种豆得豆');
 //Node.js用户请在jdCookie.js处填写京东ck;
@@ -285,18 +279,23 @@ async function doTask() {
         }
         await shopTaskList();
         const { data } = $.shopTaskListRes;
-        let goodShopListARR = [], moreShopListARR = [], shopList = [];
+        let goodShopListARR = [],moreShopListARR = [], shopList = [];
         const { goodShopList, moreShopList } = data;
-        for (let i of goodShopList) {
-          if (i.taskState === '2') {
-            goodShopListARR.push(i);
-          }
-        }
-        for (let j of moreShopList) {
-          if (j.taskState === '2') {
-            moreShopListARR.push(j);
-          }
-        }
+		if (goodShopList) {
+		    for (let i of goodShopList) {
+		        if (i.taskState === '2') {
+		            goodShopListARR.push(i);
+		        }
+		    }
+		}
+		if (moreShopList) {
+		    for (let j of moreShopList) {
+		        if (j.taskState === '2') {
+		            moreShopListARR.push(j);
+		        }
+		    }
+		}
+        
         shopList = goodShopListARR.concat(moreShopListARR);
         for (let shop of shopList) {
           const { shopId, shopTaskId } = shop;

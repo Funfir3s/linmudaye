@@ -3,21 +3,17 @@
 cron 1 * * * * jd_cfd.js
 更新时间：2021-9-11
 活动入口：京喜APP-我的-京喜财富岛
-
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #京喜财富岛
 1 * * * * jd_cfd.js, tag=京喜财富岛, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
-
 ================Loon==============
 [Script]
 cron "1 * * * *" script-path=jd_cfd.js,tag=京喜财富岛
-
 ===============Surge=================
 京喜财富岛 = type=cron,cronexp="1 * * * *",wake-system=1,timeout=3600,script-path=jd_cfd.js
-
 ============小火箭=========
 京喜财富岛 = type=cron,script-path=jd_cfd.js, cronexpr="1 * * * *", timeout=3600, enable=true
  */
@@ -290,8 +286,6 @@ function GetPropCardCenterInfo() {
     $.get(taskUrl(`user/GetPropCardCenterInfo`), async (err, resp, data) => {
       try {
         if (err) {
-          console.log(JSON.stringify(err))
-          console.log(`${$.name} GetPropCardCenterInfo API请求失败，请检查网路重试`)
         } else {
           data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
           if (data.iRet === 0) {
@@ -334,8 +328,6 @@ function UsePropCard(strCardTypeIndex) {
     $.get(taskUrl(`user/UsePropCard`, `dwCardType=${dwCardType}&strCardTypeIndex=${encodeURIComponent(strCardTypeIndex)}`), (err, resp, data) => {
       try {
         if (err) {
-          console.log(JSON.stringify(err))
-          console.log(`${$.name} UsePropCard API请求失败，请检查网路重试`)
         } else {
           data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
           if (data.iRet === 0) {
@@ -1492,7 +1484,7 @@ function taskUrl(function_path, body = '', dwEnv = 7) {
       "User-Agent": UA,
       "Accept-Language": "zh-CN,zh-Hans;q=0.9",
       "Referer": "https://st.jingxi.com/",
-      "Cookie": cookie
+      "Cookie": cookie + "cid=4"
     }
   }
 }
@@ -1510,7 +1502,7 @@ function taskListUrl(function_path, body = '', bizCode = 'jxbfd') {
       "User-Agent": UA,
       "Accept-Language": "zh-CN,zh-Hans;q=0.9",
       "Referer": "https://st.jingxi.com/",
-      "Cookie": cookie
+      "Cookie": cookie + "cid=4"
     }
   }
 }
@@ -1553,6 +1545,8 @@ function readShareCode() {
     $.get({url: ``, timeout: 30 * 1000}, (err, resp, data) => {
       try {
         if (err) {
+          console.log(JSON.stringify(err))
+          console.log(`${$.name} readShareCode API请求失败，请检查网路重试`)
         } else {
           if (data) {
             console.log(`\n随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
@@ -1574,6 +1568,8 @@ function uploadShareCode(code) {
     $.post({url: ``, timeout: 30 * 1000}, (err, resp, data) => {
       try {
         if (err) {
+          console.log(JSON.stringify(err))
+          console.log(`${$.name} uploadShareCode API请求失败，请检查网路重试`)
         } else {
           if (data) {
             if (data === 'OK') {

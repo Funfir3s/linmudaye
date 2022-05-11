@@ -283,6 +283,13 @@ if(DisableIndex!=-1){
 	RemainMessage="";
 }
 
+//汪汪赛跑
+let EnableJoyRun=true;
+DisableIndex=strDisableList.findIndex((item) => item === "汪汪赛跑");
+if(DisableIndex!=-1){
+	console.log("检测到设定关闭汪汪赛跑查询");
+	EnableJoyRun=false
+}
 	
 !(async() => {
 	if (!cookiesArr[0]) {
@@ -344,6 +351,8 @@ if(DisableIndex!=-1){
 			$.YunFeiTitle2="";
 			$.YunFeiQuan2 = 0;
 			$.YunFeiQuanEndTime2 = "";
+			$.JoyRunningAmount = "";
+			
 			TempBaipiao = "";
 			strGuoqi="";
 			console.log(`******开始查询【京东账号${$.index}】${$.nickName || $.UserName}*********`);
@@ -378,7 +387,8 @@ if(DisableIndex!=-1){
 		         getDdFactoryInfo(), // 京东工厂
 		         jdCash(), //领现金
 		         GetJxBeaninfo(), //喜豆查询
-		         GetPigPetInfo() //金融养猪
+		         GetPigPetInfo(), //金融养猪
+				 GetJoyRuninginfo() //汪汪赛跑
 		     ])
 			
 			await showMsg();
@@ -720,18 +730,24 @@ async function showMsg() {
 		ReturnMessage += `【京东秒杀】${$.JdMsScore}币(≈${($.JdMsScore / 1000).toFixed(2)}元)\n`;
 	}
 
-	if ($.joylevel || $.jdCash) {
+	if ($.joylevel || $.jdCash || $.JoyRunningAmount) {
 		ReturnMessage += `【其他信息】`;
 		if ($.joylevel) {
-			ReturnMessage += `汪汪:${$.joylevel}级`;
-			if ($.jdCash) {
-				ReturnMessage += ",";
-			}
+			ReturnMessage += `汪汪:${$.joylevel}级`;			
 		}
 		if ($.jdCash) {
+			if ($.joylevel) {
+				ReturnMessage += ",";
+			}			
 			ReturnMessage += `领现金:${$.jdCash}元`;
 		}
-
+		if ($.JoyRunningAmount) {
+			if ($.joylevel || $.jdCash) {
+				ReturnMessage += ",";
+			}			
+			ReturnMessage += `汪汪赛跑:${$.JoyRunningAmount}元`;
+		}
+		
 		ReturnMessage += `\n`;
 
 	}
@@ -1674,7 +1690,6 @@ function getCoupon() {
                         $.startIndex = useable[i].couponTitle.indexOf('-') - 3;
                         $.endIndex = useable[i].couponTitle.indexOf('元') + 1;
                         $.couponName = useable[i].couponTitle.substring($.startIndex, $.endIndex);
-
                         if ($.couponEndTime < $.todayEndTime) {
                             $.message += `【极速版券】${$.couponName}(今日过期)\n`;
                         } else if ($.couponEndTime < $.tomorrowEndTime) {
@@ -1683,7 +1698,6 @@ function getCoupon() {
                             $.couponEndTime = timeFormat(parseInt($.couponEndTime));
                             $.message += `【极速版券】${$.couponName}(有效期至${$.couponEndTime})\n`;
                         }
-
                     } */
                     //8是支付券， 7是白条券
                     if (useable[i].couponStyle == 7 || useable[i].couponStyle == 8) {
@@ -2482,7 +2496,57 @@ async function jxbean() {
 
 }
 
-
+function GetJoyRuninginfo() {
+	if (!EnableJoyRun)
+		return;
+	
+    const headers = {
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "zh-CN,zh-Hans;q=0.9",
+        "Connection": "keep-alive",
+        "Content-Length": "376",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": cookie,
+        "Host": "api.m.jd.com",
+        "Origin": "https://joypark.jd.com",
+        "Referer": "https://joypark.jd.com/",
+        "User-Agent": $.UA
+		}
+	var DateToday = new Date();
+	const body = {
+        'linkId': 'L-sOanK_5RJCz7I314FpnQ',
+		'isFromJoyPark':true,
+		'joyLinkId':'LsQNxL7iWDlXUs6cFl-AAg'
+    };
+    const options = {
+        url: `https://api.m.jd.com/?functionId=runningPageHome&body=${encodeURIComponent(JSON.stringify(body))}&t=${DateToday.getTime()}&appid=activities_platform&client=ios&clientVersion=3.8.12`,
+        headers,
+    }
+    return new Promise(resolve => {
+        $.get(options, (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(`${$.name} API请求失败，请检查网路重试`)
+                } else {
+                    if (data) {
+						//console.log(data);
+                        data = JSON.parse(data);
+                        if (data.data.runningHomeInfo.prizeValue) {
+							$.JoyRunningAmount=data.data.runningHomeInfo.prizeValue * 1;							
+						}
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp)
+            }
+            finally {
+                resolve(data)
+            }
+        })
+    })
+}
 	
 function randomString(e) {
 	e = e || 32;

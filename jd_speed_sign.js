@@ -117,7 +117,7 @@ async function signInit() {
     $.get(taskUrl('speedSignInit', {
       "activityId": "8a8fabf3cccb417f8e691b6774938bc2",
       "kernelPlatform": "RN",
-      "inviterId":"a99FNTpjt1jCNsakdDrRSw=="
+      "inviterId":"U44jAghdpW58FKgfqPdotA=="
     }), async (err, resp, data) => {
       try {
         if (err) {
@@ -743,10 +743,10 @@ function taskGetUrl(function_id, body) {
 
 function invite2() {
   let inviterIdArr = [
-    "hMMt5NIfs6lalG+VJ58n4kh7UrnluQPP69sxjzeFbZc=",
-    "pgQHO5TcujeOE8QRCqtQbE+J5hsKTce5NnXQ3Qpmzvg=",
-    "cAziZAzqgMBu488qE1oSHg==",
-    "nL8YpQFVjNdeKTuKtcL27t5YWEguFcZKLpcjyraSubs="
+    "pVbNk9xIuI02DeRtwUiztA==",
+    "s4UuZYFN6GW3jbg4x9Z8LA==",
+    "Vf+kZwVHm4/P5/ZkyCY+DA==",
+    "4y1yGPA4HCaFNCw8BZ6gsw=="
   ]
   let inviterId = inviterIdArr[Math.floor((Math.random() * inviterIdArr.length))]
   let options = {
@@ -772,10 +772,10 @@ function invite2() {
 function invite() {
   let t = +new Date()
   let inviterIdArr = [
-    "hMMt5NIfs6lalG+VJ58n4kh7UrnluQPP69sxjzeFbZc=",
-    "pgQHO5TcujeOE8QRCqtQbE+J5hsKTce5NnXQ3Qpmzvg=",
-    "cAziZAzqgMBu488qE1oSHg==",
-    "nL8YpQFVjNdeKTuKtcL27t5YWEguFcZKLpcjyraSubs="
+    "pVbNk9xIuI02DeRtwUiztA==",
+    "s4UuZYFN6GW3jbg4x9Z8LA==",
+    "Vf+kZwVHm4/P5/ZkyCY+DA==",
+    "4y1yGPA4HCaFNCw8BZ6gsw=="
   ]
   let inviterId = inviterIdArr[Math.floor((Math.random() * inviterIdArr.length))]
   let options = {
